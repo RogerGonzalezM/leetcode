@@ -1,7 +1,7 @@
-# Source: https://leetcode.com/problems/two-sum/description/
-# Author: Roger Gonzalez Monleon
+// Source: https://leetcode.com/problems/two-sum/description/
+// Author: Roger Gonzalez Monleon
 
-"""
+/*
 ***************************************************************
 *                         TWO SUM PROBLEM                     *
 ***************************************************************
@@ -44,29 +44,44 @@
 *  Space Complexity: O(n)                                     *
 *                                                             *
 ***************************************************************
-"""
+*/
 
-# ------------------ SOLUTION I: Brute Force ------------------
+// ------------------ SOLUTION I: Brute Force ------------------
 
-class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        for i in range(len(nums) - 1):
-            for j in range(len(nums)):
-                if nums[i] + nums[j] == target and i != j:
-                    return [i, j]
-        return []
-        
+public int[] twoSumBruteForce(int[] nums, int target) 
+{
+    for (int i = 0; i < nums.length - 1; i++) 
+    {
+        for (int j = 1; j < nums.length; j++) 
+        {
+            if (nums[i] + nums[j] == target && i != j) 
+            {
+                return new int[] { i, j };
+            }
+        }
+    }
+    return new int[] {};
+}
 
-# ------------------ SOLUTION II: Optimized --------------------
+// ------------------ SOLUTION II: Optimized --------------------
 
-class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        hashMap = {}
-        for i in range(len(nums)):
-            hashMap[nums[i]] = i
-        for i in range(len(nums)):
-            aux = target - nums[i]
-            if aux in hashMap and hashMap[aux] != i:
-                return [i, hashMap[aux]]
-        return []
-        
+public int[] twoSumOptimized(int[] nums, int target) 
+{
+    Map<Integer, Integer> hashMap = new HashMap<>();
+
+    for (int i = 0; i < nums.length; i++) 
+    {
+        hashMap.put(nums[i], i);
+    }
+
+    for (int i = 0; i < nums.length; i++) 
+    {
+        int aux = target - nums[i];
+        if (hashMap.containsKey(aux) && hashMap.get(aux) != i) 
+        {
+            return new int[] { i, hashMap.get(aux) };
+        }
+    }
+
+    return new int[] {};
+}
